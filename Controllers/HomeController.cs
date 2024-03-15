@@ -1,5 +1,6 @@
 using InsuranceWebApps.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
 namespace InsuranceWebApps.Controllers
@@ -32,6 +33,37 @@ namespace InsuranceWebApps.Controllers
         public IActionResult Renew()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ContactUs(ContactUsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Code to send the email here
+
+                // After sending the email, redirect to a success page
+                return RedirectToAction("ContactUsSuccess");
+            }
+
+            return View(model);
+        }
+
+        public class ContactUsViewModel
+        {
+            [Required]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+
+            [Required]
+            [Display(Name = "Message")]
+            public string Message { get; set; }
         }
     }
 }
