@@ -19,6 +19,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\alliaz.png" />
+    <None Include="wwwroot\images\car.png" />
+    <None Include="wwwroot\images\circlelogo.png" />
+    <None Include="wwwroot\images\circlenobg.png" />
+    <None Include="wwwroot\images\etiqa.png" />
+    <None Include="wwwroot\images\insurance.png" />
+    <None Include="wwwroot\images\kurnia.png" />
+    <None Include="wwwroot\images\logo.png" />
+    <None Include="wwwroot\images\logonobg.png" />
+    <None Include="wwwroot\images\motorcycle.jpg" />
+    <None Include="wwwroot\images\zurich.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
   </ItemGroup>
 

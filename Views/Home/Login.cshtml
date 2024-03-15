@@ -1,73 +1,106 @@
 ﻿@{
     ViewData["Title"] = "Login";
 }
-<h1>@ViewData["Title"]</h1>
 
 <!DOCTYPE html>
 <html>
-<body>
-
+<head>
     <style>
         .form-container {
-            position: relative;
-            top: 170px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
+            max-width: 500px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            margin: 40px auto;
         }
 
         .logo-container {
-            position: absolute;
-            top: -50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100px;
-            height: 100px;
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         .logo {
-            width: 100%;
+            width: 100px;
             height: auto;
         }
+
+        .btn-primary {
+            background-color: rebeccapurple;
+            color: white;
+        }
+
+        .btn-social {
+            width: 100%;
+            height: 40px;
+            padding: 0;
+        }
+
+        .py-4 {
+            padding-bottom: 50px !important;
+            padding-top: 50px !important;
+        }
+
+        /* Media query for screens smaller than 768px */
+        /* Media query for screens smaller than 768px */
+        <style media="(max-width: 767.98px)" >
+        .form-container {
+            max-width: 100%;
+            padding: 10px;
+        }
+
+            .logo {
+                width: 80px;
+            }
+
+            .btn-social {
+                width: 100%;
+                height: 35px;
+                padding: 0;
+            }
+        }
     </style>
+</head>
+<body>
+    <main>
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-4">
+                    <form method="post" class="form-horizontal">
+                        <input type="hidden" name="_token" value="7ND0sZBeNxWxC2D0GxFF74nRxv5rm4txWkLvxFhv">
+                        <h2 class="text-center mb30">Login</h2><br>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control" value placeholder="Email Address" maxlength="255" required autofocus autocomplete="email" />
+                        </div>
 
-    <div class="form-container">
-        <div class="logo-container">
-            <img class="logo" src="circlelogo.png" alt="Logo">
-        </div>
-        <form asp-action="Login" method="post">
-            <div class="form-group">
-                <label for="username">Username :</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div><br>
-            <div class="form-group">
-                <label for="password">Password :</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="form-check form-group">
-                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                <label class="form-check-label" for="rememberMe">Remember me</label>
-                <a href="/Account/ForgotPassword" class="btn btn-link">Forgot password?</a>
-            </div><br>
-            <center>
-                <button type="submit" value="Submit" class="btn btn-primary">Submit</button><br><br>
-                <div class="text-center">
-                    <button type="button" class="btn btn-danger" onclick="signInWithGoogle()">Sign in with Google</button><br><br>
-                    <button type="button" class="btn btn-primary" onclick="signInWithFacebook()">Sign in with Facebook</button>
+                        <div class="form-group">
+                            <input type="password" name="password" id="password" class="form-control" maxlength="100" placeholder="Password" required autocomplete="current-password" />
+                        </div>
+                        <div class="form-group">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="form-check-label" for="remember">
+                                <input name="remember" id="remember" class="form-check-input" type="checkbox" />
+                                Remember Me
+                            </label>
+                            <a href="#" class="float-right" title target>
+                                Reset Password
+                                <span class="badge " data-toggle="tooltip" title></span>
+                                <span class="badge " data-toggle="tooltip" title></span>
+                                <span class="badge " data-toggle="tooltip" title></span>
+                            </a>
+                        </div>
+                        <div class="form-group mb-0 text-center">
+                            <button class="btn btn-secondary btn-block" type="submit">Login</button>
+                            <a href="/Home/Index" class="d-inline-block px-2 py-4 mt0 mb30">&larr; Back to Home</a>
+                        </div>
+
+                        <div class="text-center">
+
+                        </div>
+
+                    </form>
                 </div>
-            </center>
-        </form>
-    </div>
-
-    <script>
-        function signInWithGoogle() {
-            // Implement sign-in with Google functionality here
-        }
-
-        function signInWithFacebook() {
-            // Implement sign-in with Facebook functionality here
-        }
-    </script>
-
+            </div>
+        </div>
+    </main>
 </body>
 </html>

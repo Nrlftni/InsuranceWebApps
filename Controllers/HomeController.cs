@@ -35,35 +35,14 @@ namespace InsuranceWebApps.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ContactUs(ContactUsViewModel model)
+        public IActionResult Login()
         {
-            if (ModelState.IsValid)
-            {
-                // Code to send the email here
-
-                // After sending the email, redirect to a success page
-                return RedirectToAction("ContactUsSuccess");
-            }
-
-            return View(model);
+            return View();
         }
 
-        public class ContactUsViewModel
+        public IActionResult ContactUs()
         {
-            [Required]
-            [Display(Name = "Name")]
-            public string Name { get; set; }
-
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
-
-            [Required]
-            [Display(Name = "Message")]
-            public string Message { get; set; }
+            return View();
         }
     }
 }

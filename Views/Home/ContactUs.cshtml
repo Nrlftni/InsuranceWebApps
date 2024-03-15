@@ -1,67 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Contact Us";
 }
-<h1>@ViewData["Title"]</h1>
-
-@model ContactUsViewModel
-
-<h1>Contact Us</h1>
-
 <style>
 
-.form-group {
-    margin-bottom: 20px;
-}
+    .container {
+        width: 500px;
+        margin: 20px auto 20px auto;
+    }
 
-.control-label {
-    display: block;
-    margin-bottom: 5px;
-}
+    label {
+        display: block;
+        margin-top: 20px;
+    }
 
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+    }
 
-.text-danger {
-    color: red;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 4px;
-    background-color: rebeccapurple;
-    color: #fff;
-    text-decoration: none;
-}
-
-.btn-primary {
-    margin-top: 10px;
-}
+        input[type="submit"] {
+            margin-top: 20px;
+            background-color: rebeccapurple;
+            padding: 10px 20px;
+            color: white;
+        }
 
 </style>
 
-<form asp-action="ContactUs" method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Name" class="control-label">Name</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email" class="control-label">Email</label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Message" class="control-label">Message</label>
-        <textarea asp-for="Message" class="form-control"></textarea>
-        <span asp-validation-for="Message" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Send Message" class="btn btn-primary" />
-    </div>
-</form>
+<div class="container">
+    <h1>Contact Us</h1>
+    <p>Feel free to get in touch with us using the form below.</p>
+    <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>

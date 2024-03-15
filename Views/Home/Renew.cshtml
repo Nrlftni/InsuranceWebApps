@@ -1,25 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Renew Now";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
 		#tabs {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-around;
 			margin-bottom: 10px;
+			background-color: white;
+			margin-left: 40px;
+			margin-right: 40px;
 		}
 
 		.tab-button {
-			padding: 5px 10px;
+			padding: 14px 40px;
 			border: none;
-			background-color: rebeccapurple;
+			background-color: white;
 			border-radius: 5px;
 			cursor: pointer;
-			color: white;
+			color: black;
+			flex: 1;
+			text-align: center;
 		}
 
 		.panel {
@@ -27,6 +34,7 @@
 			border-radius: 5px;
 			padding: 10px;
 			display: none;
+			margin-top: 20px;
 		}
 
 		.subtabs {
@@ -38,19 +46,18 @@
 		}
 
 		.subtab-button {
-			padding: 5px 10px;
+			padding: 14px 40px;
 			border: none;
 			background-color: #f2f2f2;
-			border-radius: 5px;
 			cursor: pointer;
 			flex: 1;
-			margin: 0 5px;
+			margin: 0 10px;
 			align-items: center;
 			justify-content: center;
 		}
 
 		.subpanel {
-			border: 1px solid #ccc;
+			border: 1px solid white;
 			border-radius: 5px;
 			padding: 10px;
 			display: none;
@@ -59,10 +66,18 @@
 			justify-content: center;
 		}
 
+		#car-subtabs {
+			display: flex;
+			flex-wrap: nowrap;
+			justify-content: center;
+		}
+
 		#car-subpanel-roadtax {
 			text-align: center;
 			padding: 3% 30%;
-			background-color: rebeccapurple;
+			background-color: white;
+			flex: 1;
+			overflow-y: auto;
 		}
 
 		#roadtax-form label {
@@ -71,7 +86,7 @@
 			margin: 0 auto;
 			margin-bottom: 10px;
             text-align: justify;
-            color: white;
+            color: black;
 		}
 
 		#roadtax-form input,
@@ -94,127 +109,89 @@
 				display: block;
 				margin: 0 auto;
 				margin-top: 20px;
-				padding: 10px 20px;
-				background-color: white;
-				color: purple;
+				padding:10px 20px;
+				background-color: rebeccapurple;
+				color: white;
 				border: none;
 				border-radius: 5px;
 				cursor: pointer;
 			}
+
+		<style media="(max-width: 768px)">
+			#tabs {
+				flex-direction: column;
+				margin-top: 300px;
+				background-color: white;
+				margin-left: 40px;
+				margin-right: 40px;
+			}
+
+			.tab-button {
+				padding: 10px 60px;
+				font-size: 16px;
+			}
+
+			.tab-button.active {
+				background-color: rebeccapurple;
+				color: white;
+				outline: none;
+			}
+
+			.panel {
+				padding: 10px;
+			}
+
+			.subtabs {
+				flex-direction: column;
+			}
+
+			.subtab-button {
+				padding: 10px 20px;
+				font-size: 16px;
+			}
+
+			.subtab-button:active, .subtab-button:focus {
+				background-color: rebeccapurple;
+				color: white;
+			}
+
+			.subpanel {
+				padding: 10px;
+			}
+
+			#car-subpanel-roadtax {
+				padding: 3% 10%;
+			}
+		}
 	</style>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-	<div id="tabs" style="padding: 3% 10%;">
-		<button class="tab-button" id="car-tab">
-			<img src="images/car.png" alt="Car" style="display: block; margin: 0 auto;">
-			Car
-		</button>
-		<button class="tab-button" id="motorcycle-tab">
-			<img src="motorycle.jpg" alt="Motor" style="display: block; margin: 0 auto;">
-			Motorcycle
-		</button>
-		<button class="tab-button" id="insurance-tab">
-			<img src="insurance.jpg" alt="Insurance" style="display: block; margin: 0 auto;">
+	<div id="tabs">
+		<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+			<img src="/images/car.png" alt="Motorcycle" style="width: 50px; height: 50px; margin-top: 20px;">
+			<button class="tab-button" id="car-tab">
+				Car
+			</button>
+		</div>
+		<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+			<img src="/images/motorcycle.jpg" alt="Motorcycle" style="width: 50px; height: 50px; margin-top: 20px;">
+			<button class="tab-button" id="motorcycle-tab">
+				Motorcycle
+			</button>
+		</div>
+		<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+			<img src="/images/insurance.png" alt="Motorcycle" style="width: 50px; height: 50px; margin-top: 20px;">
+			<button class="tab-button" id="insurance-tab">
 			Insurance
 		</button>
-		<button class="tab-button" id="transfer-tab">Transfer</button>
-	</div>
-
-	<div id="car-panel" class="panel">
-		<div id="car-subtabs">
-			<button class="subtab-button" id="car-insurance-tab">Insurance</button>
-			<button class="subtab-button" id="car-insurance-roadtax-tab">Insurance + Roadtax</button>
-			<button class="subtab-button" id="car-roadtax-tab">Roadtax</button>
 		</div>
-
-		<div id="car-subpanel-roadtax" class="subpanel">
-			<form id="roadtax-form">
-				<label for="registration-number">Registration/Plate Number:</label><br>
-				<input type="text" id="registration-number" name="registration-number" required><br>
-
-				<label for="mykad-ic">MyKad/IC:</label><br>
-				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
-
-				<label for="full-name">Full Name:</label><br>
-				<input type="text" id="full-name" name="full-name" required><br>
-
-				<label for="email">Email:</label><br>
-				<input type="email" id="email" name="email" required><br>
-
-				<label for="phone-number">Phone Number:</label><br>
-				<input type="tel" id="phone-number" name="phone-number" required><br>
-
-				<label for="address">Address:</label><br>
-				<textarea id="address" name="address" required></textarea><br>
-
-				<label for="insurance-company">Insurance Company:</label><br>
-				<input type="text" id="insurance-company" name="insurance-company" required><br>
-
-				<label for="upload-file">Upload File (Additional):</label><br>
-				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
-
-				<input type="submit" value="Submit">
-			</form>
+		<div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+			<img src="/images/motorcycle.jpg" alt="Motorcycle" style="width: 50px; height: 50px; margin-top: 20px;">
+		<button class="tab-button" id="transfer-tab">
+			Transfer
+		</button>
 		</div>
-
-		<div id="car-subpanel-roadtax" class="subpanel">
-		<form id="roadtax-form">
-			<label for="registration-number">Registration/Plate Number:</label><br>
-			<input type="text" id="registration-number" name="registration-number" required><br>
-
-			<label for="mykad-ic">MyKad/IC:</label><br>
-			<input type="text" id="mykad-ic" name="mykad-ic" required><br>
-
-			<label for="full-name">Full Name:</label><br>
-			<input type="text" id="full-name" name="full-name" required><br>
-
-			<label for="email">Email:</label><br>
-			<input type="email" id="email" name="email" required><br>
-
-			<label for="phone-number">Phone Number:</label><br>
-			<input type="tel" id="phone-number" name="phone-number" required><br>
-
-			<label for="address">Address:</label><br>
-			<textarea id="address" name="address" required></textarea><br>
-
-			<label for="insurance-company">Insurance Company:</label><br>
-			<input type="text" id="insurance-company" name="insurance-company" required><br>
-
-			<label for="upload-file">Upload File (Additional):</label><br>
-			<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
-
-			<input type="submit" value="Submit">
-		</form>
-		</div>
-
-		<div id="car-subpanel-roadtax" class="subpanel">
-			<form id="roadtax-form">
-				<label for="registration-number">Registration/Plate Number:</label><br>
-				<input type="text" id="registration-number" name="registration-number" required><br>
-
-				<label for="mykad-ic">MyKad/IC:</label><br>
-				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
-
-				<label for="full-name">Full Name:</label><br>
-				<input type="text" id="full-name" name="full-name" required><br>
-
-				<label for="email">Email:</label><br>
-				<input type="email" id="email" name="email" required><br>
-
-				<label for="phone-number">Phone Number:</label><br>
-				<input type="tel" id="phone-number" name="phone-number" required><br>
-
-				<label for="address">Address:</label><br>
-				<textarea id="address" name="address" required></textarea><br>
-
-				<label for="upload-file">Upload File (Additional):</label><br>
-				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
-
-				<input type="submit" value="Submit">
-			</form>
-		</div>
-
 	</div>
 
 	<div id="car-panel" class="panel">
@@ -310,7 +287,6 @@
 				<input type="submit" value="Submit">
 			</form>
 		</div>
-
 	</div>
 
 	<div id="car-panel" class="panel">
@@ -406,7 +382,196 @@
 				<input type="submit" value="Submit">
 			</form>
 		</div>
+	</div>
 
+	<div id="car-panel" class="panel">
+		<div id="car-subtabs">
+			<button class="subtab-button" id="car-insurance-tab">Insurance</button>
+			<button class="subtab-button" id="car-insurance-roadtax-tab">Insurance + Roadtax</button>
+			<button class="subtab-button" id="car-roadtax-tab">Roadtax</button>
+		</div>
+
+		<div id="car-subpanel-roadtax" class="subpanel">
+			<form id="roadtax-form">
+				<label for="registration-number">Registration/Plate Number:</label><br>
+				<input type="text" id="registration-number" name="registration-number" required><br>
+
+				<label for="mykad-ic">MyKad/IC:</label><br>
+				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
+
+				<label for="full-name">Full Name:</label><br>
+				<input type="text" id="full-name" name="full-name" required><br>
+
+				<label for="email">Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+
+				<label for="phone-number">Phone Number:</label><br>
+				<input type="tel" id="phone-number" name="phone-number" required><br>
+
+				<label for="address">Address:</label><br>
+				<textarea id="address" name="address" required></textarea><br>
+
+				<label for="insurance-company">Insurance Company:</label><br>
+				<input type="text" id="insurance-company" name="insurance-company" required><br>
+
+				<label for="upload-file">Upload File (Additional):</label><br>
+				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
+
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="car-subpanel-roadtax" class="subpanel">
+			<form id="roadtax-form">
+				<label for="registration-number">Registration/Plate Number:</label><br>
+				<input type="text" id="registration-number" name="registration-number" required><br>
+
+				<label for="mykad-ic">MyKad/IC:</label><br>
+				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
+
+				<label for="full-name">Full Name:</label><br>
+				<input type="text" id="full-name" name="full-name" required><br>
+
+				<label for="email">Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+
+				<label for="phone-number">Phone Number:</label><br>
+				<input type="tel" id="phone-number" name="phone-number" required><br>
+
+				<label for="address">Address:</label><br>
+				<textarea id="address" name="address" required></textarea><br>
+
+				<label for="insurance-company">Insurance Company:</label><br>
+				<input type="text" id="insurance-company" name="insurance-company" required><br>
+
+				<label for="upload-file">Upload File (Additional):</label><br>
+				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
+
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="car-subpanel-roadtax" class="subpanel">
+			<form id="roadtax-form">
+				<label for="registration-number">Registration/Plate Number:</label><br>
+				<input type="text" id="registration-number" name="registration-number" required><br>
+
+				<label for="mykad-ic">MyKad/IC:</label><br>
+				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
+
+				<label for="full-name">Full Name:</label><br>
+				<input type="text" id="full-name" name="full-name" required><br>
+
+				<label for="email">Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+
+				<label for="phone-number">Phone Number:</label><br>
+				<input type="tel" id="phone-number" name="phone-number" required><br>
+
+				<label for="address">Address:</label><br>
+				<textarea id="address" name="address" required></textarea><br>
+
+				<label for="upload-file">Upload File (Additional):</label><br>
+				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
+
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+
+	<div id="car-panel" class="panel">
+		<div id="car-subtabs">
+			<button class="subtab-button" id="car-insurance-tab">Insurance</button>
+			<button class="subtab-button" id="car-insurance-roadtax-tab">Insurance + Roadtax</button>
+			<button class="subtab-button" id="car-roadtax-tab">Roadtax</button>
+		</div>
+
+		<div id="car-subpanel-roadtax" class="subpanel">
+			<form id="roadtax-form">
+				<label for="registration-number">Registration/Plate Number:</label><br>
+				<input type="text" id="registration-number" name="registration-number" required><br>
+
+				<label for="mykad-ic">MyKad/IC:</label><br>
+				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
+
+				<label for="full-name">Full Name:</label><br>
+				<input type="text" id="full-name" name="full-name" required><br>
+
+				<label for="email">Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+
+				<label for="phone-number">Phone Number:</label><br>
+				<input type="tel" id="phone-number" name="phone-number" required><br>
+
+				<label for="address">Address:</label><br>
+				<textarea id="address" name="address" required></textarea><br>
+
+				<label for="insurance-company">Insurance Company:</label><br>
+				<input type="text" id="insurance-company" name="insurance-company" required><br>
+
+				<label for="upload-file">Upload File (Additional):</label><br>
+				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
+
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="car-subpanel-roadtax" class="subpanel">
+			<form id="roadtax-form">
+				<label for="registration-number">Registration/Plate Number:</label><br>
+				<input type="text" id="registration-number" name="registration-number" required><br>
+
+				<label for="mykad-ic">MyKad/IC:</label><br>
+				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
+
+				<label for="full-name">Full Name:</label><br>
+				<input type="text" id="full-name" name="full-name" required><br>
+
+				<label for="email">Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+
+				<label for="phone-number">Phone Number:</label><br>
+				<input type="tel" id="phone-number" name="phone-number" required><br>
+
+				<label for="address">Address:</label><br>
+				<textarea id="address" name="address" required></textarea><br>
+
+				<label for="insurance-company">Insurance Company:</label><br>
+				<input type="text" id="insurance-company" name="insurance-company" required><br>
+
+				<label for="upload-file">Upload File (Additional):</label><br>
+				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
+
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+
+		<div id="car-subpanel-roadtax" class="subpanel">
+			<form id="roadtax-form">
+				<label for="registration-number">Registration/Plate Number:</label><br>
+				<input type="text" id="registration-number" name="registration-number" required><br>
+
+				<label for="mykad-ic">MyKad/IC:</label><br>
+				<input type="text" id="mykad-ic" name="mykad-ic" required><br>
+
+				<label for="full-name">Full Name:</label><br>
+				<input type="text" id="full-name" name="full-name" required><br>
+
+				<label for="email">Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+
+				<label for="phone-number">Phone Number:</label><br>
+				<input type="tel" id="phone-number" name="phone-number" required><br>
+
+				<label for="address">Address:</label><br>
+				<textarea id="address" name="address" required></textarea><br>
+
+				<label for="upload-file">Upload File (Additional):</label><br>
+				<input type="file" id="upload-file" name="upload-file" accept=".pdf, .jpg, .jpeg, .png"><br>
+
+				<input type="submit" value="Submit">
+			</form>
+		</div>
 	</div>
 
 	<script>
@@ -431,6 +596,15 @@
 
 		document.querySelector('#car-roadtax-tab').addEventListener('click', () => {
 			document.querySelector('#roadtax-form').style.display = 'block';
+		});
+
+		const tabButtons = document.querySelectorAll('.tab-button');
+
+		tabButtons.forEach(tabButton => {
+			tabButton.addEventListener('click', () => {
+				tabButtons.forEach(tabButton => tabButton.classList.remove('active'));
+				tabButton.classList.add('active');
+			});
 		});
 	</script>
 
